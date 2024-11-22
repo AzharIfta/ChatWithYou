@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat with My Beloved</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #fff;
+      background: linear-gradient(to bottom right, #ff9d9d, #ffcad4);
+      overflow: hidden;
+    }
+    .hearts {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+    .hearts div {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.5);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      animation: float 6s infinite;
+    }
+    @keyframes float {
+      0% {
+        transform: translateY(100%);
+      }
+      100% {
+        transform: translateY(-50%);
+      }
+    }
+    .hearts div:nth-child(1) {
+      left: 10%;
+      animation-duration: 5s;
+    }
+    .hearts div:nth-child(2) {
+      left: 30%;
+      animation-duration: 6s;
+    }
+    .hearts div:nth-child(3) {
+      left: 50%;
+      animation-duration: 7s;
+    }
+    .hearts div:nth-child(4) {
+      left: 70%;
+      animation-duration: 5.5s;
+    }
+    .hearts div:nth-child(5) {
+      left: 90%;
+      animation-duration: 6.5s;
+    }
+    header {
+      text-align: center;
+      margin-top: 50px;
+      font-size: 2rem;
+    }
+    .chat-container {
+      margin: 50px auto;
+      width: 90%;
+      max-width: 500px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+    .chat-box {
+      height: 300px;
+      overflow-y: auto;
+      border: 1px solid #fff;
+      border-radius: 5px;
+      background: rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      color: #000;
+      margin-bottom: 15px;
+    }
+    .input-container {
+      display: flex;
+      gap: 10px;
+    }
+    .input-container input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+    }
+    .input-container button {
+      padding: 10px 20px;
+      background: #ff748d;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <header>
+    <p>السلام عليكم ورحمة الله وبركاته</p>
+    <p>Welcome My Beloved...</p>
+  </header>
+
+  <div class="chat-container">
+    <div id="chat-box" class="chat-box"></div>
+    <div class="input-container">
+      <input type="text" id="chat-input" placeholder="Type your message...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    let chatBox = document.getElementById("chat-box");
+
+    function sendMessage() {
+      let input = document.getElementById("chat-input");
+      let message = input.value.trim();
+      if (message) {
+        let msgDiv = document.createElement("div");
+        msgDiv.textContent = message;
+        chatBox.appendChild(msgDiv);
+        localStorage.setItem("chatHistory", chatBox.innerHTML);
+        input.value = "";
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }
+    }
+
+    function loadChatHistory() {
+      let storedChat = localStorage.getItem("chatHistory");
+      if (storedChat) {
+        chatBox.innerHTML = storedChat;
+      }
+    }
+
+    function clearChatForHer() {
+      chatBox.innerHTML = "";
+    }
+
+    loadChatHistory();
+
+    // Uncomment this function for her side:
+    // clearChatForHer();
+  </script>
+</body>
+</html>
